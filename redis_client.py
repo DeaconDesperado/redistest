@@ -28,6 +28,7 @@ class RedisCon:
             self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.sock.connect((host_ip,host_port))
         except socket.error:
+            #connection is bad, print msg and exit
             print 'No server running at at %s:%s' % (host_ip,host_port)
             sys.exit()
 
