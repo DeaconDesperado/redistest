@@ -6,5 +6,11 @@ class RedisTest(unittest.TestCase):
         sadd("KEY","VALUE")
         self.assertIs(sismember("KEY","VALUE"),1)
 
+    def test_sadd(self):
+        self.assertIsInstance(sadd("KEY","VALUE"),int)
+
+    def test_sismember(self):
+        self.assertIsInstance(sadd("KEY","VALUE"),int)
+
 if __name__ == '__main__':
     unittest.main()
