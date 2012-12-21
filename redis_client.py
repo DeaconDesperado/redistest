@@ -14,6 +14,8 @@ log.addHandler(sh)
 class RedisConException(Exception):
     """
     This is just a client-specific exception that gets the remainder of error responses
+
+    Might need to add implementation specific stuff later
     """
     def __init__(self,message):
         Exception.__init__(self,message)
