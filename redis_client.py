@@ -19,9 +19,9 @@ class RedisConException(Exception):
         Exception.__init__(self,message)
 
 class RedisCon:
-    """ The redis connection, at localhost for demo purposes"""
+    """ The simplest of redis clients, at localhost for demo purposes"""
 
-    def __init__(self,host_ip = '127.0.0.1',host_port=6379):
+    def __init__(self,host_ip ='127.0.0.1',host_port=6379):
         try:
             self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.sock.connect((host_ip,host_port))
@@ -47,11 +47,9 @@ class RedisCon:
         """
         if response_string[0] == '-':
             #response is an error
-            success = False
             raise RedisConException(response_string[1:])
         elif response_string[0] == '+':
             #response is a status reply
-            success = True
             ret_val = response_string[1:].strip()
         elif response_string[0] == ':':
             #response is an int
@@ -74,6 +72,9 @@ class RedisCon:
         resp = self._send_cmd('TYPE',key)
         return resp
 
+    def __del__(self):
+        self.sock.close()
+
 
 def sadd(key,value):
     r = RedisCon()
@@ -87,8 +88,8 @@ def sismember(key,value):
 
 
 if __name__ == '__main__':
-    log.info('%s new members added to set',sadd('test','testing'))
-    assert sismember('test','testing')
+    log.info('%s new members added to set',sadd('me','you'))
+    assert sismember('me','you')
 
 
 
