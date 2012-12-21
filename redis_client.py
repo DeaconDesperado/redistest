@@ -28,7 +28,8 @@ class RedisCon:
             self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.sock.connect((host_ip,host_port))
         except socket.error:
-            print 'No server running at localhost'
+            print 'No server running at at %s:%s' % (host_ip,host_port)
+            sys.exit()
 
     def _send_cmd(self,cmd,*args):
         """
