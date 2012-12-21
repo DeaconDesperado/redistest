@@ -42,7 +42,7 @@ class RedisCon:
         try:
             resp_data += self.sock.recv(1024)
         except socket.timeout:
-            pass
+            raise Exception('The connection with the server timed out while receiving a response')
         return self._parse_response(resp_data)
 
     def _parse_response(self,response_string):
