@@ -38,7 +38,11 @@ class RedisCon:
         self.sock.send(cmd_slug)
         resp_data = ''
         #put proper wait to recv here
-        resp_data += self.sock.recv(1024)
+        self.sock.settimeout(5.0)
+        try:
+            resp_data += self.sock.recv(1024)
+        except socket.timeout:
+            pass
         return self._parse_response(resp_data)
 
     def _parse_response(self,response_string):
@@ -88,8 +92,8 @@ def sismember(key,value):
 
 
 if __name__ == '__main__':
-    log.info('%s new members added to set',sadd('me','you'))
-    assert sismember('me','you')
+    print type(sadd('me','you'))
+    print type(sismember('me','you'))
 
 
 
