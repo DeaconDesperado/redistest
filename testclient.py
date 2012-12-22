@@ -4,12 +4,6 @@ A simple procedural script that will create a redis client
 import socket
 import sys
 import re
-import logging
-
-log = logging.getLogger(__name__)
-sh = logging.StreamHandler()
-log.setLevel(logging.DEBUG)
-log.addHandler(sh)
 
 class RedisConException(Exception):
     """
@@ -93,11 +87,5 @@ def sismember(key,value):
     r = RedisCon()
     response = r.sismember(key,value)
     return response
-
-
-if __name__ == '__main__':
-    print type(sadd('me','you'))
-    print type(sismember('me','you'))
-
 
 
