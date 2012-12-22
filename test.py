@@ -1,4 +1,4 @@
-from redis_client import sadd, sismember
+from testclient import sadd, sismember
 import unittest
 
 class RedisTest(unittest.TestCase):
